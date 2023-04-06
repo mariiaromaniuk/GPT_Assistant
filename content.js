@@ -1,6 +1,5 @@
 chrome.runtime.onMessage.addListener(
     function (request, _sender, _sendResponse) {
-  
       if (request.greeting === "show_prompter") {
         chrome.storage.sync.get(['api_key'], function (result) {
           if (result.api_key === undefined || result.api_key === '') {
@@ -14,7 +13,6 @@ chrome.runtime.onMessage.addListener(
   );
   
   function showSettingsPage() {
-  
     if (document.getElementsByClassName("gpt3_prompter___settings-popup").length > 0) {
       document.getElementsByClassName("gpt3_prompter___settings-popup")[0].focus();
       return;
@@ -70,7 +68,6 @@ chrome.runtime.onMessage.addListener(
     });
   
   }
-  
   
   function showPrompter() {
     const selectedText = window.getSelection().toString().trim();
@@ -128,7 +125,6 @@ chrome.runtime.onMessage.addListener(
       tempField.innerHTML = data.temperature;
     });
     tempField.className = "gpt3_prompter___white-text-bold";
-  
     tempSlider.oninput = function () {
       chrome.storage.sync.set({ "temperature": this.value });
       tempField.innerHTML = this.value;
