@@ -2,7 +2,6 @@ chrome.runtime.onMessage.addListener(
     function (request, _sender, _sendResponse) {
   
       if (request.greeting === "show_prompter") {
-  
         chrome.storage.sync.get(['api_key'], function (result) {
           if (result.api_key === undefined || result.api_key === '') {
             showSettingsPage();
@@ -48,13 +47,11 @@ chrome.runtime.onMessage.addListener(
     saveBtn.innerHTML = "Save";
   
     appendChildren(settingsPopup, [input, hint, get_api_key, saveBtn]);
-  
     document.body.appendChild(settingsPopup);
-  
     input.focus();
   
     get_api_key.addEventListener('click', function () {
-      window.open('https://beta.openai.com/account/api-keys');
+      window.open('https://platform.openai.com/account/api-keys');
     });
   
     saveBtn.addEventListener('click', function () {
@@ -76,7 +73,6 @@ chrome.runtime.onMessage.addListener(
   
   
   function showPrompter() {
-  
     const selectedText = window.getSelection().toString().trim();
   
     if (document.getElementsByClassName("gpt3_prompter___prompt-popup").length > 0) {
@@ -85,9 +81,7 @@ chrome.runtime.onMessage.addListener(
       if (selectedText !== "") {
         textArea.value = selectedText;
       }
-  
       textArea.focus();
-  
       return;
     }
   
@@ -212,7 +206,6 @@ chrome.runtime.onMessage.addListener(
   }
   
   function putCursorAtTheEnd(textArea) {
-  
     range = document.createRange();
     range.selectNodeContents(textArea);
     range.collapse(false);
@@ -229,7 +222,6 @@ chrome.runtime.onMessage.addListener(
   }
   
   function makePrompterDraggable(topBar, prompter) {
-  
     // make draggable by the top bar
     var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
     topBar.onmousedown = dragMouseDown;
@@ -319,7 +311,6 @@ chrome.runtime.onMessage.addListener(
   function onSubmitClick(submitButton, text) {
   
     textArea = document.getElementById("gpt3_prompter___prompt-area");
-  
     // loading animation
     var loadingAnimation = document.createElement("div");
     loadingAnimation.className = "gpt3_prompter___loading-animation";
@@ -336,7 +327,6 @@ chrome.runtime.onMessage.addListener(
   
       var span = document.createElement("span");
       if (response.error == null) {
-  
         span.style.backgroundColor = "#d2f4d3";
         console.log(response);
         span.innerHTML = response.choices[0].text;
